@@ -1,0 +1,6 @@
+# Tool-generated and archived text is preserved verbatim, including spacing.
+reports/** -whitespace
+netlist/*.v -whitespace
+tb/archive/** -whitespace
+scripts/archive/** -whitespace
+

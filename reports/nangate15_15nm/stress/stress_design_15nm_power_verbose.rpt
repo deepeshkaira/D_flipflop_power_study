@@ -1,0 +1,50 @@
+****************************************
+Report : Averaged Power
+	-verbose
+Design : low_power_block
+Version: W-2024.09-SP5-5
+Date   : Sat Sep 26 16:16:16 2026
+****************************************
+
+Library(s) Used:
+
+    NanGate_15nm_OCL (File: /home/UFAD/deepesh.kaira/Prime_time_UPF/lib/nangate15_db/NanGate_15nm_OCL_typical.db)
+
+
+Operating Conditions: typical   Library: NanGate_15nm_OCL
+Wire Load Model Mode: top
+
+<no wire load model is set>
+
+Power-specific unit information :
+    Voltage Units = 1 V
+    Capacitance Units = 0.001 pf
+    Time Units = 0.001 ns
+    Dynamic Power Units = 1 W
+    Leakage Power Units = 1 W
+
+
+
+  Attributes
+  ----------
+      i  -  Including register clock pin internal power
+      u  -  User defined power group
+
+                        Internal  Switching  Leakage    Total
+Power Group             Power     Power      Power      Power   (     %)  Attrs
+--------------------------------------------------------------------------------
+clock_network           1.080e-06 1.979e-07 3.642e-08 1.315e-06 (56.31%)  i
+register                6.498e-07    0.0000 3.704e-07 1.020e-06 (43.69%)  
+combinational              0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+sequential                 0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+memory                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+io_pad                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+black_box                  0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+
+  Net Switching Power  = 1.979e-07   ( 8.48%)
+  Cell Internal Power  = 1.730e-06   (74.10%)
+  Cell Leakage Power   = 4.068e-07   (17.42%)
+                         ---------
+Total Power            = 2.335e-06  (100.00%)
+
+1

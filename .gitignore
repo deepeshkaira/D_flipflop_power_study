@@ -1,0 +1,32 @@
+# Tool work libraries and caches
+work/
+work_*/
+alib-*/
+*.syn
+*.svf
+*.pvl
+*.mr
+
+# Compiled technology libraries are regenerated locally and may be licensed
+lib/**/*.db
+lib/**/*.lib
+lib/**/*.lib.gz
+
+# Binary synthesis/simulation products
+*.ddc
+*.wlf
+*.vcd
+*.fsdb
+*.ucdb
+transcript
+modelsim.ini
+
+# Runtime logs
+logs/*.log
+*.log
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*.swp
+

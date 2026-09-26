@@ -1,0 +1,28 @@
+------------------------------------------------------------
+----- QuestaSim Power Aware Design Element Report File -----
+------------------------------------------------------------
+-- QuestaSim Version : 2026.2_2 2026.07
+-- Generated on      : Tue Sep 22 15:07:12 2026
+------------------------------------------------------------
+-- Format:
+--   Power Domain / Scope Mapping:
+--      <domain name>[(PD_ID)] : {<path #>} = scope <full path to element> [<>]
+--           specifies scope that is part of power domain <domain name>
+--           <> identifies a scope at the power domain boundary
+--           SIM identifies a scope as simulation only
+--           PD_ID : Power Domain ID assigned by the tool if another power domain
+--                   of same name is present in a different scope.
+--                   The PD_ID information is present in power architecture report.
+--   Power Domain Element Identification:
+--      <domain name>[(PD_ID)] : {<path #>}/<element name> [<element type>]
+--           specifies design element in power domain <domain name>
+--           <element type> is one of
+--             NPM_FF       => Non-retention Flip-Flop
+--             MEM          => Non-retention Memory
+--             UDP_LA       => Non-retention UDP latch
+--             UDP_FF       => Non-retention UDP Flip-Flop
+--             R            => Retention element
+--             <none>       => Combinational logic
+------------------------------------------------------------
+
+

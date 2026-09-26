@@ -1,0 +1,16 @@
+create_power_domain PD_TOP -elements {low_power_block}
+
+create_supply_port VDD -direction in
+create_supply_port VSS -direction in
+
+create_supply_net VDD_n -domain PD_TOP
+create_supply_net VSS_n -domain PD_TOP
+
+connect_supply_net VDD_n -ports {VDD}
+connect_supply_net VSS_n -ports {VSS}
+
+set_domain_supply_net PD_TOP -primary_power_net VDD_n -primary_ground_net VSS_n
+
+add_port_state VDD -state {VDD_ON 0.8}
+add_port_state VSS -state {VSS_ON 0.0}
+

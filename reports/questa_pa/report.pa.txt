@@ -1,0 +1,27 @@
+----------------------------------------------------------
+----- QuestaSim Power Aware Architecture Report File -----
+----------------------------------------------------------
+-- QuestaSim Version : 2026.2_2 2026.07
+-- Generated on      : Tue Sep 22 15:07:11 2026
+----------------------------------------------------------
+-- This report file contains information about all
+-- the Power Aware Architecture elements in the design.
+----------------------------------------------------------
+
+Power Domain: /accumulator_clock_gated_tb/dut/PD_ACC, File: /home/UFAD/deepesh.kaira/Questa_power_UPF/upf/accumulator_upf.upf(2).
+	Creation Scope: /accumulator_clock_gated_tb/dut
+
+	Extents:
+			1. Instance : /accumulator_clock_gated_tb/dut
+
+	Primary Supplies:
+		power  : /accumulator_clock_gated_tb/dut/VDD
+		ground : /accumulator_clock_gated_tb/dut/VSS
+	Supply Set handles:
+		1. primary: PD_ACC.primary
+			Functions:
+				1. power     : /accumulator_clock_gated_tb/dut/VDD
+				2. ground    : /accumulator_clock_gated_tb/dut/VSS
+
+	PD Status: Always On, Reason: Primary supplies start with default OFF and supply_on routine found at tb/accumulator_clock_gated_tb.sv(450). during initalization.
+----------------------------------------------------------
