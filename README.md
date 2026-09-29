@@ -1,6 +1,6 @@
 # Power-Aware DFF Verification and Power Analysis
 
-This repository records a small ASIC low-power lab built around an 8-bit enabled D flip-flop. It progresses from functional UVM verification and UPF-aware simulation to SAIF-driven synthesis and PrimeTime power analysis.
+This repository records a small ASIC design built around an 8-bit enabled D flip-flop. It progresses from functional UVM verification and UPF-aware simulation to SAIF-driven Design compiler synthesis and PrimeTime power analysis.
 
 The completed experiments cover:
 
@@ -25,7 +25,7 @@ The original gated and ungated simulations used different sequences and therefor
 | **Total power** | **1.0563 µW** | **0.6702 µW** | **36.6% lower** |
 | Cell area | 74.8829 area units | 78.1488 area units | **4.36% higher** |
 
-The adjusted comparison gives an overall saving of approximately **0.3861 µW**, reducing total power from **1.0563 µW to 0.6702 µW**. The largest contribution still comes from the 37.0% reduction in internal power because clock edges no longer reach the eight storage elements during disabled periods. Net switching contributes a further 30% saving under the normalized target. Leakage increases slightly because the enable latch and gating logic add cells.
+The comparison gives an overall saving of approximately **0.3861 µW**, reducing total power from **1.0563 µW to 0.6702 µW**. The largest contribution still comes from the 37.0% reduction in internal power because clock edges no longer reach the eight storage elements during disabled periods. Net switching contributes a further 30% saving under the normalized target. Leakage increases slightly because the enable latch and gating logic add cells.
 
 The power calculations are:
 
@@ -70,7 +70,7 @@ In absolute terms, the ASAP7 implementation consumes **1.1102 µW less** total p
 | Registers | 0.4521 µW (36.91%) | 1.020 µW (43.69%) |
 | Combinational logic | 0.1902 µW (15.53%) | 0 µW (0%) |
 
-The grouping differs because the clock gates are implemented differently. The historical ASAP7 version uses a latch plus mapped logic, so some gating power appears under combinational logic. The adjusted ASAP7 group values preserve the original PrimeTime proportions while scaling them to the revised **1.2248 µW** total. The NanGate implementation uses the characterized `CLKGATETST_X1` integrated clock-gating cell, which PrimeTime recognizes as part of the clock network. The NanGate clock-gate hierarchy alone accounts for approximately **0.548 µW**, or **23.5%** of its **2.335 µW** total power.
+The grouping differs because the clock gates are implemented differently. The ASAP7 version uses a latch plus mapped logic, so some gating power appears under combinational logic. The ASAP7 group values preserve the original PrimeTime proportions while scaling them to the revised **1.2248 µW** total. The NanGate implementation uses the characterized `CLKGATETST_X1` integrated clock-gating cell, which PrimeTime recognizes as part of the clock network. The NanGate clock-gate hierarchy alone accounts for approximately **0.548 µW**, or **23.5%** of its **2.335 µW** total power.
 
 ### What the reported power terms mean
 
@@ -79,7 +79,7 @@ The grouping differs because the clock gates are implemented differently. The hi
 - **Leakage power** is static power drawn while cells remain powered, even when they do not switch. It depends on the process, threshold-voltage option, cell sizing, voltage, and temperature.
 - **Total power** is the sum of internal, switching, and leakage power.
 
-In the adjusted ASAP7 comparison, internal power contributes approximately **90.22%**, switching power **9.49%**, and leakage power **0.29%**. For NanGate 15 nm, the corresponding shares are approximately **74.1%**, **8.48%**, and **17.42%**. NanGate has both higher switching power and a much larger leakage component, which contributes to its higher total power in this comparison.
+In the  ASAP7 comparison, internal power contributes approximately **90.22%**, switching power **9.49%**, and leakage power **0.29%**. For NanGate 15 nm, the corresponding shares are approximately **74.1%**, **8.48%**, and **17.42%**. NanGate has both higher switching power and a much larger leakage component, which contributes to its higher total power in comparison.
 
 ## Design evolution
 
@@ -91,9 +91,9 @@ The baseline is an 8-bit register with an asynchronous active-low reset. When `e
 
 The historical ASAP7 experiment captures the enable while the source clock is low and combines it with the clock to produce a glitch-free gated clock. The mapped implementation contains eight `ASYNC_DFFHx1_ASAP7_75t_R` cells, one `DLLx1_ASAP7_75t_R` enable latch, and the inverters and logic gates required by technology mapping.
 
-The mapped cell area rises from **74.8829** to **78.1488** area units. This 4.36% overhead is the physical cost paid for suppressing clock activity during idle periods.
+The mapped cell area rises from **74.8829** to **78.1488** area units. This 4.36% overhead is the physical cost for suppressing clock activity during idle periods.
 
-### Synthesis-inserted NanGate integrated clock gate
+### Synthesis-inserted NanGate 15nm integrated clock gate
 
 For NanGate 15 nm, the RTL remains technology-neutral and Design Compiler performs automatic clock-gate insertion. Inspection of the mapped netlist and reference report confirmed:
 
@@ -206,7 +206,7 @@ The Design Compiler report and the PrimeTime report serve different purposes. Th
 
 ## Interpretation limits
 
-- The same-library gated-versus-ungated result is currently a Design Compiler estimate, not a matched pair of PrimeTime PX runs.
+- The same-library gated-versus-ungated result is currently a Design Compiler estimate, not a matched pair of PrimeTime runs.
 - The earlier gated and ungated simulations used different sequences and produced different SAIF workloads, so their activity-based power values cannot be used to calculate a valid gating percentage.
 - The 7 nm implementation uses a manual latch-and-logic clock gate; the 15 nm implementation uses a characterized ICG.
 - ASAP7 is analyzed at 0.7 V, while NanGate is analyzed at 0.8 V.
@@ -215,7 +215,7 @@ The Design Compiler report and the PrimeTime report serve different purposes. Th
 - The NanGate power check reports 27 out-of-range ramps and eight out-of-range loads.
 - Neither run includes extracted interconnect parasitics or a wire-load model.
 
-The defensible conclusions are therefore:
+The conclusions are as follows:
 
 1. With switching power normalized to a **30% reduction**, the adjusted ASAP7 model gives **36.7% lower dynamic power** and **36.6% lower total power**, with a **4.36% cell-area increase**.
 2. Clock gating reduces internal clocked-cell power, but it introduces switching, leakage, area, and timing overhead.
@@ -225,7 +225,7 @@ The defensible conclusions are therefore:
 
 ## Library policy
 
-Compiled `.db` files and source PDK libraries are intentionally excluded from Git. Even when a library is openly available, keeping generated binaries out of the repository avoids large files and unclear redistribution terms. Scripts and expected filenames are included instead.
+Compiled `.db` files and source PDK libraries are intentionally excluded from Git - University rule.
 
 The ASAP7 source is divided into AO, INVBUF, OA, SEQ, and SIMPLE Liberty libraries, resulting in five compiled `.db` files. NanGate 15 nm packages its available cells in one combined Liberty library, so one compiled `.db` is sufficient. The investigated NanGate package includes ordinary logic, sequential cells, and an integrated clock-gating cell, but no characterized isolation, level-shifter, retention, or power-switch cells were identified.
 
